@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: eff5595c16647a142bced10d2d9ab35a
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - NeverMind
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: b869be94e2e17d040abb77f3b94d7a37, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
