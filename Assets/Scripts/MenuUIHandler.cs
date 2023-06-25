@@ -23,9 +23,21 @@ public class MenuUIHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        List<string> bestPlayer = GameObject.Find("PlayerData").GetComponent<PlayerDataHolder>().bestPlayer;
         if (language == 0)
         {
-            bestScoreText.text = "没人玩过！";
+            if (bestPlayer.Count == 0) { bestScoreText.text = "没人玩过！"; }
+            else if (bestPlayer.Count > 0)
+            {
+                int i = 0, bestScore = GameObject.Find("PlayerData").GetComponent<PlayerDataHolder>().bestScore;
+                foreach (string recordPlayer in bestPlayer)
+                {
+                    bestScoreText.text += recordPlayer;
+                    i++;
+                    if (i < bestPlayer.Count) { bestScoreText.text += "，"; }
+                }
+                bestScoreText.text += "目前以" + bestScore + "分的高分荣登榜首。";
+            }
             namePlaceHolder.text = "请在此输入你的名字……";
             submitText.text = "提交";
             startText.text = "开始游戏";
@@ -33,7 +45,18 @@ public class MenuUIHandler : MonoBehaviour
         }
         else if (language == 1)
         {
-            bestScoreText.text = "No player have played the game!";
+            if (bestPlayer.Count == 0) { bestScoreText.text = "No player have played the game!"; }
+            else if (bestPlayer.Count > 0)
+            {
+                int i = 0, bestScore = GameObject.Find("PlayerData").GetComponent<PlayerDataHolder>().bestScore;
+                foreach (string recordPlayer in bestPlayer)
+                {
+                    bestScoreText.text += recordPlayer;
+                    i++;
+                    if (i < bestPlayer.Count) { bestScoreText.text += ", "; }
+                }
+                bestScoreText.text += "hold the record at " + bestScore + " points. ";
+            }
             namePlaceHolder.text = "Enter your name...";
             submitText.text = "Submit";
             startText.text = "Start";
@@ -49,6 +72,7 @@ public class MenuUIHandler : MonoBehaviour
 
     public void StartGame()
     {
+        if (playerName == "") { GameObject.Find("PlayerData").GetComponent<PlayerDataHolder>().playerName = "Anonymous"; }
         SceneManager.LoadScene(1);
     }
 
