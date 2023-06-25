@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerDataHolder : MonoBehaviour
 {
     public string playerName;
-    public int language;
+    public int language, bestScore;
+    public List<string> bestPlayer;
     public static PlayerDataHolder instance;
     private void Awake()
     {
@@ -20,12 +21,12 @@ public class PlayerDataHolder : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
