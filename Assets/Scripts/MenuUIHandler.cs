@@ -17,12 +17,7 @@ public class MenuUIHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        language = GameObject.Find("PlayerData").GetComponent<PlayerDataHolder>().language;
         List<string> bestPlayer = GameObject.Find("PlayerData").GetComponent<PlayerDataHolder>().bestPlayer;
         if (language == 0)
         {
@@ -55,7 +50,7 @@ public class MenuUIHandler : MonoBehaviour
                     i++;
                     if (i < bestPlayer.Count) { bestScoreText.text += ", "; }
                 }
-                bestScoreText.text += "hold the record at " + bestScore + " points. ";
+                bestScoreText.text += " hold the record at " + bestScore + " points. ";
             }
             namePlaceHolder.text = "Enter your name...";
             submitText.text = "Submit";
@@ -63,6 +58,7 @@ public class MenuUIHandler : MonoBehaviour
             exitText.text = "Exit";
         }
     }
+
 
     public void SubmitPlayerName()
     {
@@ -81,6 +77,7 @@ public class MenuUIHandler : MonoBehaviour
         if (language == 0) { language = 1; }
         else if (language == 1) { language = 0; }
         GameObject.Find("PlayerData").GetComponent<PlayerDataHolder>().language = language;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void ExitApplication()

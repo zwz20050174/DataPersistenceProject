@@ -43,6 +43,7 @@ public class MainManager : MonoBehaviour
             int bestScore = GameObject.Find("PlayerData").GetComponent<PlayerDataHolder>().bestScore;
             List<string> bestPlayer = GameObject.Find("PlayerData").GetComponent<PlayerDataHolder>().bestPlayer;
             int language = GameObject.Find("PlayerData").GetComponent<PlayerDataHolder>().language;
+            playerName = GameObject.Find("PlayerData").GetComponent<PlayerDataHolder>().playerName;
             if (language == 0)
             {
                 if (bestPlayer.Count == 0) { bestScoreText.text = "没有最高分纪录。"; }
@@ -72,13 +73,13 @@ public class MainManager : MonoBehaviour
                         i++;
                         if (i < bestPlayer.Count) { bestScoreText.text += ", "; }
                     }
-                    bestScoreText.text += "hold the record at " + bestScore + " points. ";
+                    bestScoreText.text += " hold the record at " + bestScore + " points. ";
                 }
                 ScoreText.text = playerName + ", Score : 0";
                 backToMenuText.text = "Back to menu";
             }
         }
-        else { bestScoreText.text = " 没有最高分纪录。"; ScoreText.text = playerName + "，分数：0"; backToMenuText.text = "返回至菜单"; }
+        else { playerName = "Anonymous"; bestScoreText.text = " 没有最高分纪录。"; ScoreText.text = playerName + "，分数：0"; backToMenuText.text = "返回至菜单"; }
     }
 
     private void Update()
@@ -124,12 +125,13 @@ public class MainManager : MonoBehaviour
         else if (GameObject.Find("PlayerData").GetComponent<PlayerDataHolder>().language == 1) { GameOverText.GetComponent<TextMeshProUGUI>().text = "GAME OVER\r\nPress Space to Restart\r\n"; }
         else { GameOverText.GetComponent<TextMeshProUGUI>().text = "游戏结束\r\n按下空格键重新开始\r\n"; }
         GameOverText.SetActive(true);
-        if (m_Points == GameObject.Find("PlayerData").GetComponent<PlayerDataHolder>().bestScore) { GameObject.Find("PlayerData").GetComponent<PlayerDataHolder>().bestPlayer.Add(playerName); }
+        if (m_Points == GameObject.Find("PlayerData").GetComponent<PlayerDataHolder>().bestScore && !GameObject.Find("PlayerData").GetComponent<PlayerDataHolder>().bestPlayer.Contains(playerName)) { GameObject.Find("PlayerData").GetComponent<PlayerDataHolder>().bestPlayer.Add(playerName); }
         if (m_Points > GameObject.Find("PlayerData").GetComponent<PlayerDataHolder>().bestScore)
         {
             GameObject.Find("PlayerData").GetComponent<PlayerDataHolder>().bestPlayer.Clear();
             GameObject.Find("PlayerData").GetComponent<PlayerDataHolder>().bestScore = m_Points;
             GameObject.Find("PlayerData").GetComponent<PlayerDataHolder>().bestPlayer.Add(playerName);
         }
+        if (GameObject.Find("PlayerData") != null) { GameObject.Find("PlayerData").GetComponent<PlayerDataHolder>().SaveUserProfile(); }
     }
 }
