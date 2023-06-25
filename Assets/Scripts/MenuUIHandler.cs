@@ -82,6 +82,7 @@ public class MenuUIHandler : MonoBehaviour
 
     public void ExitApplication()
     {
+        if (GameObject.Find("PlayerData") != null) { GameObject.Find("PlayerData").GetComponent<PlayerDataHolder>().SaveUserProfile(); }
 #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
 #else
